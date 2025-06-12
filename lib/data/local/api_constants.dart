@@ -1,5 +1,5 @@
 class APIURLConstants {
-  static const baseUrl = "https://admin.exbix.com";
+  static const baseUrl = "https://imanpnl.exbix.com";
 
   ///End Urls : POST
   static const signIn = "/api/sign-in";

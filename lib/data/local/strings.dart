@@ -264,6 +264,7 @@ class Strings extends Translations {
           "Memo (optional)": "Memo (optional)",
           "ensure_memo_correct": "Add your memo if needed but please ensure it is correct, otherwise, you lose the coin",
 
+
           ///Profile views
           "Profile": "Profile",
           "Edit Profile": "Edit Profile",

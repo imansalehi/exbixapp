@@ -350,7 +350,7 @@ class SocketConstants {
 }
 
 class URLConstants {
-  static const website = "https://imanpnl.exbix.com";
+  static const website = "https://exbix.com";
   static const referralLink = "$website/signup?";
   static const blogShare = "$website/blog/";
   static const fbReferral = "https://www.facebook.com/sharer/sharer.php?u=";

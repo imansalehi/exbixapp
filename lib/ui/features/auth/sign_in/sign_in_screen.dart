@@ -11,7 +11,6 @@ import 'package:exbix_flutter/utils/button_util.dart';
 import 'package:exbix_flutter/utils/dimens.dart';
 import 'package:exbix_flutter/utils/text_field_util.dart';
 import 'package:exbix_flutter/utils/text_util.dart';
-import 'package:exbix_flutter/utils/recaptcha_widget.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -28,52 +27,43 @@ class SignInPageState extends State<SignInPage> {
     return Scaffold(
         backgroundColor: context.theme.scaffoldBackgroundColor,
         appBar: AppBarAuthView(title: "Sign Up".tr, onPress: () => Get.off(() => const SignUpScreen())),
-        body: Stack(
-          children: [
-            SafeArea(
-              child: ListView(
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: Dimens.paddingLargeDouble),
-                children: [
-                  vSpacer20(),
-                  AuthTopTitleView(title: 'Sign In'.tr, subTitle: 'SignIn_description'.tr),
-                  vSpacer10(),
-                  textFieldWithSuffixIcon(
-                      labelText: 'Email'.tr, controller: _controller.emailEditController, hint: "Email".tr, type: TextInputType.emailAddress),
-                  vSpacer15(),
-                  Obx(() {
-                    return textFieldWithSuffixIcon(
-                        labelText: 'Password'.tr,
-                        controller: _controller.passEditController,
-                        hint: "Password".tr,
-                        type: TextInputType.visiblePassword,
-                        iconPath: _controller.isShowPassword.value ? AssetConstants.icPasswordShow : AssetConstants.icPasswordHide,
-                        isObscure: !_controller.isShowPassword.value,
-                        iconAction: () {
-                          _controller.isShowPassword.value = !_controller.isShowPassword.value;
-                        });
-                  }),
-                  vSpacer20(),
-                  InkWell(
-                    onTap: () => Get.off(() => const ForgotPasswordPage()),
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    child: TextRobotoAutoNormal('Forgot Password'.tr, decoration: TextDecoration.underline),
-                  ),
-                  vSpacer30(),
-                  buttonRoundedMain(text: "Sign In".tr, onPress: () => _controller.isInPutDataValid(context)),
-                  vSpacer20(),
-                  const SocialLoginView(),
-                ],
+        body: SafeArea(
+          child: ListView(
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: Dimens.paddingLargeDouble),
+            children: [
+              vSpacer20(),
+              AuthTopTitleView(title: 'Sign In'.tr, subTitle: 'SignIn_description'.tr),
+              vSpacer10(),
+              textFieldWithSuffixIcon(
+                  labelText: 'Email'.tr, controller: _controller.emailEditController, hint: "Email".tr, type: TextInputType.emailAddress),
+              vSpacer15(),
+              Obx(() {
+                return textFieldWithSuffixIcon(
+                    labelText: 'Password'.tr,
+                    controller: _controller.passEditController,
+                    hint: "Password".tr,
+                    type: TextInputType.visiblePassword,
+                    iconPath: _controller.isShowPassword.value ? AssetConstants.icPasswordShow : AssetConstants.icPasswordHide,
+                    isObscure: !_controller.isShowPassword.value,
+                    iconAction: () {
+                      _controller.isShowPassword.value = !_controller.isShowPassword.value;
+                    });
+              }),
+              vSpacer20(),
+              InkWell(
+                onTap: () => Get.off(() => const ForgotPasswordPage()),
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                child: TextRobotoAutoNormal('Forgot Password'.tr, decoration: TextDecoration.underline),
               ),
-            ),
-            RecaptchaWidget(
-              controller: _controller.recaptchaController,
-              onVerified: _controller.onRecaptchaVerified,
-              onError: _controller.onRecaptchaError,
-            ),
-          ],
+              vSpacer30(),
+              buttonRoundedMain(text: "Sign In".tr, onPress: () => _controller.isInPutDataValid(context)),
+              vSpacer20(),
+              const SocialLoginView(),
+            ],
+          ),
         ));
   }
 }

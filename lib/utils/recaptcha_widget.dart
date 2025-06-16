@@ -18,9 +18,22 @@ class RecaptchaWidget extends StatelessWidget {
     return RecaptchaV2(
       apiKey: "6LdTYUArAAAAAMkFByy8UJnvCgot8Th-K-lirX7Z", 
       apiSecret: "6LdTYUArAAAAANOWObr2lH8XVe9gNoInHq-mjqA2", 
-      onVerified: onVerified,
-      onVerifiedError: onError,
       controller: controller,
+      onVerifiedError: onError,
+      onVerifiedSuccessfully: (success) {
+        if (success) {
+          // گوگل ریکپچا موفق بود، حالا توکن را از کنترلر بگیر
+          controller.getVerificationToken().then((token) {
+            if (token != null) {
+              onVerified(token);
+            } else {
+              onError?.call("Failed to retrieve token.");
+            }
+          });
+        } else {
+          onError?.call("Recaptcha verification failed.");
+        }
+      },
     );
   }
 }

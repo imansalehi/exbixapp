@@ -3,7 +3,7 @@ import 'package:flutter_recaptcha_v2_compat/flutter_recaptcha_v2_compat.dart';
 
 class RecaptchaWidget extends StatelessWidget {
   final RecaptchaV2Controller controller;
-  final Function() onVerified;
+  final Function(String token) onVerified;
   final Function(String)? onError;
 
   const RecaptchaWidget({
@@ -24,11 +24,9 @@ class RecaptchaWidget extends StatelessWidget {
         onError?.call(err);
       },
       onVerifiedSuccessfully: (success) {
-        if (success) {
-          // ✔ تأیید موفقیت‌آمیز
-          onVerified();
+        if (success && controller.response != null && controller.response!.isNotEmpty) {
+          onVerified(controller.response!); // ارسال توکن
         } else {
-          // ❌ تأیید ناموفق
           onError?.call("Recaptcha verification failed.");
         }
       },

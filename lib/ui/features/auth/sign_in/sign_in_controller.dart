@@ -10,17 +10,21 @@ import 'package:exbix_flutter/utils/alert_util.dart';
 import 'package:exbix_flutter/utils/common_utils.dart';
 import 'package:exbix_flutter/data/local/api_constants.dart';
 import 'package:exbix_flutter/ui/features/auth/email_verify/email_verify_page.dart';
+import 'package:flutter_recaptcha_v2_compat/flutter_recaptcha_v2_compat.dart';
 
 class SignInController extends GetxController {
   TextEditingController emailEditController = TextEditingController();
   TextEditingController passEditController = TextEditingController();
   TextEditingController codeEditController = TextEditingController();
   RxBool isShowPassword = false.obs;
+  final RecaptchaV2Controller recaptchaController = RecaptchaV2Controller();
+  String? recaptchaToken;
 
   void clearInputData() {
     emailEditController.text = "";
     passEditController.text = "";
     isShowPassword = false.obs;
+    recaptchaToken = null;
   }
 
   void isInPutDataValid(BuildContext context) {
@@ -33,6 +37,10 @@ class SignInController extends GetxController {
         showToast("Password_invalid_message".trParams({"count": DefaultValue.kPasswordLength.toString()}), isError: true);
         return;
       }
+      if (recaptchaToken == null) {
+        showToast("Please complete the captcha".tr, isError: true);
+        return;
+      }
       hideKeyboard(context: context);
       loginUser(context);
     } else {
@@ -42,7 +50,7 @@ class SignInController extends GetxController {
 
   void loginUser(BuildContext context) {
     showLoadingDialog();
-    APIRepository().loginUser(emailEditController.text.trim(), passEditController.text).then((resp) {
+    APIRepository().loginUser(emailEditController.text.trim(), passEditController.text, recaptchaToken: recaptchaToken).then((resp) {
       hideLoadingDialog();
       if (resp.success) {
         final success = resp.data[APIKeyConstants.success] as bool? ?? false;
@@ -105,4 +113,11 @@ class SignInController extends GetxController {
     }
   }
 
+  void onRecaptchaVerified(String token) {
+    recaptchaToken = token;
+  }
+
+  void onRecaptchaError(String error) {
+    showToast(error, isError: true);
+  }
 }

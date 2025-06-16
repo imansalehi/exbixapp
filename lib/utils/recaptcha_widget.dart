@@ -1,26 +1,26 @@
- import 'package:flutter/material.dart';
 import 'package:flutter_recaptcha_v2_compat/flutter_recaptcha_v2_compat.dart';
+import 'package:flutter/material.dart';
 
 class RecaptchaWidget extends StatelessWidget {
   final RecaptchaV2Controller controller;
-  final Function(bool) onVerified;
-  final Function(String) onError;
+  final Function(String) onVerified;
+  final Function(String)? onError;
 
   const RecaptchaWidget({
     Key? key,
     required this.controller,
     required this.onVerified,
-    required this.onError,
+    this.onError,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RecaptchaV2(
-      apiKey: "YOUR_SITE_KEY", // کلید سایت reCAPTCHA را اینجا قرار دهید
-      apiSecret: "YOUR_SECRET_KEY", // کلید سکرت reCAPTCHA را اینجا قرار دهید
-      controller: controller,
+      apiKey: "6LdTYUArAAAAAMkFByy8UJnvCgot8Th-K-lirX7Z", // کلید سایت reCAPTCHA خود را اینجا قرار دهید
+      apiSecret: "6LdTYUArAAAAANOWObr2lH8XVe9gNoInHq-mjqA2", // کلید سکرت reCAPTCHA خود را اینجا قرار دهید
+      onVerified: onVerified,
       onVerifiedError: onError,
-      onVerifiedSuccessfully: onVerified,
+      controller: controller,
     );
   }
 }

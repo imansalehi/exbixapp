@@ -1,9 +1,9 @@
-import 'package:flutter_recaptcha_v2_compat/flutter_recaptcha_v2_compat.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_recaptcha_v2_compat/flutter_recaptcha_v2_compat.dart';
 
 class RecaptchaWidget extends StatelessWidget {
   final RecaptchaV2Controller controller;
-  final Function(String) onVerified;
+  final Function() onVerified;
   final Function(String)? onError;
 
   const RecaptchaWidget({
@@ -16,22 +16,19 @@ class RecaptchaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RecaptchaV2(
-      apiKey: "6LdTYUArAAAAAMkFByy8UJnvCgot8Th-K-lirX7Z", 
-      apiSecret: "6LdTYUArAAAAANOWObr2lH8XVe9gNoInHq-mjqA2", 
-      pluginURL: "https://recaptcha-flutter-plugin.firebaseapp.com/", // 👈 اضافه شد
+      apiKey: "6LdTYUArAAAAAMkFByy8UJnvCgot8Th-K-lirX7Z",
+      apiSecret: "6LdTYUArAAAAANOWObr2lH8XVe9gNoInHq-mjqA2",
+      pluginURL: "https://recaptcha-flutter-plugin.firebaseapp.com/",
       controller: controller,
-      onVerifiedError: onError,
+      onVerifiedError: (err) {
+        onError?.call(err);
+      },
       onVerifiedSuccessfully: (success) {
         if (success) {
-          // گوگل ریکپچا موفق بود، حالا توکن را از کنترلر بگیر
-          controller.getVerificationToken().then((token) {
-            if (token != null) {
-              onVerified(token);
-            } else {
-              onError?.call("Failed to retrieve token.");
-            }
-          });
+          // ✔ تأیید موفقیت‌آمیز
+          onVerified();
         } else {
+          // ❌ تأیید ناموفق
           onError?.call("Recaptcha verification failed.");
         }
       },

@@ -23,9 +23,9 @@ class RecaptchaWidget extends StatelessWidget {
       onVerifiedError: (err) {
         onError?.call(err);
       },
-      onVerifiedSuccessfully: (success) {
-        if (success && controller.response != null && controller.response!.isNotEmpty) {
-          onVerified(controller.response!); // ارسال توکن
+      onVerifiedSuccessfully: (token) {
+        if (token != null && token.isNotEmpty) {
+          onVerified(token); // ارسال توکن معتبر
         } else {
           onError?.call("Recaptcha verification failed.");
         }

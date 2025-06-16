@@ -62,7 +62,7 @@ class SignInPageState extends State<SignInPage> {
             vSpacer20(),
             RecaptchaWidget(
               controller: _controller.recaptchaController,
-              onVerified: _controller.onRecaptchaVerified,
+              onVerified: () => _controller.onRecaptchaVerified(),
               onError: _controller.onRecaptchaError,
             ),
             vSpacer20(),

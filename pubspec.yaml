@@ -72,6 +72,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^4.0.0
   change_app_package_name: ^1.3.0  #flutter pub run change_app_package_name:main com.new.package.name
+  flutter_recaptcha_v2_compat: ^latest_version
 
   flutter_launcher_icons: ^0.13.1
 

@@ -16,8 +16,8 @@ class RecaptchaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RecaptchaV2(
-      apiKey: "6LdTYUArAAAAAMkFByy8UJnvCgot8Th-K-lirX7Z", // کلید سایت reCAPTCHA خود را اینجا قرار دهید
-      apiSecret: "6LdTYUArAAAAANOWObr2lH8XVe9gNoInHq-mjqA2", // کلید سکرت reCAPTCHA خود را اینجا قرار دهید
+      apiKey: "6LdTYUArAAAAAMkFByy8UJnvCgot8Th-K-lirX7Z", 
+      apiSecret: "6LdTYUArAAAAANOWObr2lH8XVe9gNoInHq-mjqA2", 
       onVerified: onVerified,
       onVerifiedError: onError,
       controller: controller,

@@ -18,6 +18,7 @@ class RecaptchaWidget extends StatelessWidget {
     return RecaptchaV2(
       apiKey: "6LdTYUArAAAAAMkFByy8UJnvCgot8Th-K-lirX7Z", 
       apiSecret: "6LdTYUArAAAAANOWObr2lH8XVe9gNoInHq-mjqA2", 
+      pluginURL: "https://recaptcha-flutter-plugin.firebaseapp.com/", // 👈 اضافه شد
       controller: controller,
       onVerifiedError: onError,
       onVerifiedSuccessfully: (success) {

@@ -36,7 +36,7 @@ class RecaptchaWidget extends StatelessWidget {
         return RecaptchaV2(
           apiKey: config['site_key'] ?? '',
           apiSecret: config['secret_key'] ?? '',
-          onVerifiedCallback: onVerified,
+          onVerified: onVerified,
           onVerifiedError: onError,
           controller: controller,
           onExpired: () {

@@ -999,4 +999,8 @@ class APIRepository {
 // Future<ServerResponse> getNetworkInfo() async {
 //   return provider.getRequestWithFullUrl(URLConstants.networkInfo);
 // }
+
+  Future<ServerResponse> getRecaptchaConfig() async {
+    return provider.getRequest(APIURLConstants.getCommonSettings, authHeader());
+  }
 }

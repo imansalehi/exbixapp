@@ -39,6 +39,11 @@ class RecaptchaWidget extends StatelessWidget {
           onVerified: onVerified,
           onVerifiedError: onError,
           controller: controller,
+          onExpired: () {
+            if (onError != null) {
+              onError!('reCAPTCHA منقضی شده است');
+            }
+          },
         );
       },
     );

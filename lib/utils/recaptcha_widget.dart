@@ -18,7 +18,7 @@ class RecaptchaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: APIRepository().getRecaptchaConfig(),
+      future: APIRepository().getRecaptchaConfig().then((response) => response.data as Map<String, dynamic>),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -36,7 +36,7 @@ class RecaptchaWidget extends StatelessWidget {
         return RecaptchaV2(
           apiKey: config['site_key'] ?? '',
           apiSecret: config['secret_key'] ?? '',
-          onVerified: onVerified,
+          onVerifiedCallback: onVerified,
           onVerifiedError: onError,
           controller: controller,
           onExpired: () {

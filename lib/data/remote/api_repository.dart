@@ -44,16 +44,14 @@ class APIRepository {
 
   /// *** POST requests *** ///
 
-  Future<ServerResponse> registerUser(String firstName, String lastName, String email, String password, {String? phone, String? recaptchaToken}) async {
+  Future<ServerResponse> registerUser(String firstName, String lastName, String email, String password, {String? phone}) async {
     var mapObj = {};
     mapObj[APIKeyConstants.firstName] = firstName;
     mapObj[APIKeyConstants.lastName] = lastName;
     mapObj[APIKeyConstants.email] = email;
     mapObj[APIKeyConstants.password] = password;
     mapObj[APIKeyConstants.confirmPassword] = password;
-    if (recaptchaToken != null) {
-      mapObj[APIKeyConstants.recaptcha] = recaptchaToken;
-    }
+    mapObj[APIKeyConstants.recaptcha] = "noReCAPTCHA";
     if (phone.isValid) mapObj[APIKeyConstants.phone] = phone;
 
     return provider.postRequest(APIURLConstants.signUp, mapObj, authHeader());
@@ -76,13 +74,11 @@ class APIRepository {
     return provider.postRequest(APIURLConstants.verifyEmail, mapObj, authHeader(), isDynamic: true);
   }
 
-  Future<ServerResponse> loginUser(String email, String password, {String? recaptchaToken}) async {
+  Future<ServerResponse> loginUser(String email, String password) async {
     var mapObj = {};
     mapObj[APIKeyConstants.email] = email;
     mapObj[APIKeyConstants.password] = password;
-    if (recaptchaToken != null) {
-      mapObj[APIKeyConstants.recaptcha] = recaptchaToken;
-    }
+    //mapObj[APIKeyConstants.recaptcha] = "noReCAPTCHA";
     return provider.postRequest(APIURLConstants.signIn, mapObj, authHeader(), isDynamic: true);
   }
 
@@ -999,8 +995,4 @@ class APIRepository {
 // Future<ServerResponse> getNetworkInfo() async {
 //   return provider.getRequestWithFullUrl(URLConstants.networkInfo);
 // }
-
-  Future<ServerResponse> getRecaptchaConfig() async {
-    return provider.getRequest(APIURLConstants.getCommonSettings, authHeader());
-  }
 }

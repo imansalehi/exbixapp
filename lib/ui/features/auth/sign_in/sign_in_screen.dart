@@ -11,7 +11,6 @@ import 'package:exbix_flutter/utils/button_util.dart';
 import 'package:exbix_flutter/utils/dimens.dart';
 import 'package:exbix_flutter/utils/text_field_util.dart';
 import 'package:exbix_flutter/utils/text_util.dart';
-import 'package:exbix_flutter/utils/recaptcha_widget.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -52,12 +51,6 @@ class SignInPageState extends State<SignInPage> {
                       _controller.isShowPassword.value = !_controller.isShowPassword.value;
                     });
               }),
-              vSpacer20(),
-              RecaptchaWidget(
-                controller: _controller.recaptchaController,
-                onVerified: _controller.onRecaptchaVerified,
-                onError: _controller.onRecaptchaError,
-              ),
               vSpacer20(),
               InkWell(
                 onTap: () => Get.off(() => const ForgotPasswordPage()),

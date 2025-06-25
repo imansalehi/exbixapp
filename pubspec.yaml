@@ -65,7 +65,6 @@ dependencies:
   flutter_countdown_timer: ^4.1.0
   textfield_tags: ^3.0.1
   chat_bubbles: ^1.6.0
-  flutter_recaptcha_v2_compat: ^1.0.5
 
 
 dev_dependencies:

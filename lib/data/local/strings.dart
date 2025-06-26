@@ -17788,9 +17788,7 @@ class Strings extends Translations {
   "Action": "การดำเนินการ",
   "IP Address": "ที่อยู่ IP",
   "Bank List": "รายการธนาคาร",
-  "Your bank list will
-
- appear here": "รายการธนาคารของคุณจะปรากฏที่นี่",
+  "Your bank list will appear here": "รายการธนาคารของคุณจะปรากฏที่นี่",
   "Bank Name": "ชื่อธนาคาร",
   "Edit": "แก้ไข",
   "Actions": "การดำเนินการ",

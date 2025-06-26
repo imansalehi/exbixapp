@@ -16840,7 +16840,7 @@ class Strings extends Translations {
   "Amount_less_then": "Hindi maaaring mas mababa ang halaga kaysa @amount",
   "Amount_greater_then": "Hindi maaaring mas malaki ang halaga kaysa @amount",
   "Please setup your google 2FA": "Mangyaring i-set up ang iyong Google 2FA para sa prosesong ito mula sa pahina ng mga setting",
- bye "You will withdrawal": "Mag-wi-withdraw ka",
+  "You will withdrawal": "Mag-wi-withdraw ka",
   "to this address": "sa address na ito",
   "Withdrawal Coin": "Coin na I-wi-wi",
   "Your wallets will listed here": "Ang iyong mga wallet ay ililista dito",

@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "859030657591",
-    "project_id": "exbix-220b7",
-    "storage_bucket": "exbix-220b7.firebasestorage.app"
+    "project_number": "666405532600",
+    "project_id": "exbix-dffb6",
+    "storage_bucket": "exbix-dffb6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:859030657591:android:11f44658fc166e10de7db2",
+        "mobilesdk_app_id": "1:666405532600:android:701d9b2b512a2d691b954d",
         "android_client_info": {
           "package_name": "com.codemen.exbix"
         }
       },
       "oauth_client": [
         {
-          "client_id": "859030657591-g7v22c9hed0uchgo10neiarvh54c7j6b.apps.googleusercontent.com",
+          "client_id": "666405532600-gungpk6kb0mergtep2n2l5e0ok3d3s7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codemen.exbix",
+            "certificate_hash": "5c2fd64cb45a7c9b1227527568f745877371ed82"
+          }
+        },
+        {
+          "client_id": "666405532600-jk2t6uju2f0cqsbjhg0t4e8add8uhufl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC7U8z2GZ-6gyT4lnlTHd9D0uJm58ofFPc"
+          "current_key": "AIzaSyBoUR7XRfiGawSPQGvNbSlYIQn397EQi44"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "859030657591-g7v22c9hed0uchgo10neiarvh54c7j6b.apps.googleusercontent.com",
+              "client_id": "666405532600-jk2t6uju2f0cqsbjhg0t4e8add8uhufl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

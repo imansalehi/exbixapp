@@ -18,6 +18,7 @@ import 'data/local/strings.dart';
 import 'data/remote/api_provider.dart';
 import 'data/remote/api_repository.dart';
 import 'helper/app_helper.dart';
+import 'package:exbix_flutter/services/translation_service.dart';
 
 void main() async {
   await dotenv.load(fileName: EnvKeyValue.kEnvFile);
@@ -28,10 +29,13 @@ void main() async {
   Get.put(APIProvider());
   Get.put(SocketProvider());
   initBuySellColor();
-  getCommonSettings().then((value) {
-    if (value) SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(const MyApp()));
-  });
-}
+getCommonSettings().then((value) async {
+  if (value) {
+    await TranslationService.init(); // اضافه کن
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+        .then((value) => runApp(const MyApp()));
+  }
+});
 
 Future<void> _setDefaultValues() async {
   GetStorage().writeIfNull(PreferenceKey.isDark, systemThemIsDark());
@@ -80,7 +84,7 @@ class MyApp extends StatelessWidget {
         theme: Themes.light,
         darkTheme: Themes.dark,
         themeMode: ThemeService().theme,
-        translations: Strings(),
+        translations: TranslationService(),
         locale: LanguageUtil.getCurrentLocal(),
         fallbackLocale: LanguageUtil.locales.first.local,
         localizationsDelegates: const [

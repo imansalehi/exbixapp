@@ -1,5 +1,5 @@
 class APIURLConstants {
-  static const baseUrl = "https://admin.exbix.com";
+  static const baseUrl = "https://imanpnl.exbix.com";
 
   ///End Urls : POST
   static const signIn = "/api/sign-in";
@@ -322,7 +322,7 @@ class APIKeyConstants {
 }
 
 class SocketConstants {
-  static const baseUrl = "wss://admin.exbix.com/app/test";
+  static const baseUrl = "wss://imanpnl.exbix.com/app/test";
 
   static const channelNewMessage = "New-Message-";
   static const channelOrderStatus = "Order-Status-";
@@ -350,7 +350,7 @@ class SocketConstants {
 }
 
 class URLConstants {
-  static const website = "https://admin.exbix.com";
+  static const website = "https://imanpnl.exbix.com";
   static const referralLink = "$website/signup?";
   static const blogShare = "$website/blog/";
   static const fbReferral = "https://www.facebook.com/sharer/sharer.php?u=";

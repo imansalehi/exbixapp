@@ -1,22 +1,24 @@
-name: Build APK & AAB
+name: Build Signed APK and AAB
 
 on:
   push:
-    branches: [ main ] # یا هر شاخه‌ای که می‌خوای
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
-    name: Build APK and AAB
+    name: Build Signed APK & AAB
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout source
         uses: actions/checkout@v3
 
-      - name: Set up Flutter
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.6' 
+          flutter-version: '3.19.6'
 
       - name: Install dependencies
         run: flutter pub get
@@ -25,7 +27,7 @@ jobs:
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/upload-keystore.jks
 
-      - name: Create key.properties
+      - name: Create key.properties file
         run: |
           echo "storeFile=upload-keystore.jks" > android/key.properties
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/key.properties
@@ -39,13 +41,13 @@ jobs:
         run: flutter build appbundle --release
 
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: app-release.apk
+          name: signed-app-release.apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload AAB
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: app-release.aab
+          name: signed-app-release.aab
           path: build/app/outputs/bundle/release/app-release.aab

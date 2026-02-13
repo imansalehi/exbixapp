@@ -1,4 +1,4 @@
-name: Build Signed APK and AAB
+name: Build Signed AAB
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build Signed APK & AAB
+    name: Build Signed AAB
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +26,11 @@ jobs:
       - name: Install Android 35 SDK packages
         run: |
           yes | sdkmanager --licenses
+          SDK_DIR="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          rm -rf "${SDK_DIR}/platforms/android-35" "${SDK_DIR}/build-tools/35.0.0"
           sdkmanager --install "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          test -f "${SDK_DIR}/platforms/android-35/android.jar"
+          jar tf "${SDK_DIR}/platforms/android-35/android.jar" >/dev/null
 
       - name: Install dependencies
         run: flutter pub get
@@ -42,9 +46,6 @@ jobs:
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
 
-      - name: Build APK
-        run: flutter build apk --release
-
       - name: Build AAB
         run: flutter build appbundle --release
 
@@ -56,13 +57,6 @@ jobs:
           ls -lh "$AAB_PATH"
           shasum -a 256 "$AAB_PATH"
           jar tf "$AAB_PATH" | grep -q "BundleConfig.pb"
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: signed-app-release.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
-          if-no-files-found: error
 
       - name: Upload AAB
         uses: actions/upload-artifact@v4

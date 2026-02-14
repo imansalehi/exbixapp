@@ -41,6 +41,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Verify resolved dependency versions
+        run: |
+          set -e
+          grep -n "persona_flutter" pubspec.lock
+          grep -n "win32" pubspec.lock
+          grep -A7 -n "persona_flutter:" pubspec.lock
+          grep -A7 -n "win32:" pubspec.lock
+
       - name: Patch persona_flutter Kotlin ambiguity (temporary)
         run: |
           set -e

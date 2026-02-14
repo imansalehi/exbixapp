@@ -41,6 +41,19 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Patch persona_flutter Kotlin ambiguity (temporary)
+        run: |
+          set -e
+          PLUGIN_FILE=$(find "$HOME/.pub-cache/hosted/pub.dev" -type f -path "*/persona_flutter-*/android/src/main/kotlin/com/jorgefspereira/persona_flutter/PersonaFlutterPlugin.kt" | head -n 1 || true)
+          if [ -n "$PLUGIN_FILE" ]; then
+            echo "Patching $PLUGIN_FILE"
+            perl -0777 -i -pe 's/(\.field\(\s*key\s*,\s*)value(\s*\))/\1value.toString()\2/g' "$PLUGIN_FILE"
+            perl -0777 -i -pe 's/(\.field\(\s*field\.key\s*,\s*)field\.value(\s*\))/\1field.value.toString()\2/g' "$PLUGIN_FILE"
+            sed -n '250,290p' "$PLUGIN_FILE" || true
+          else
+            echo "persona_flutter plugin file not found, skipping patch"
+          fi
+
       - name: Decode keystore from secrets
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/upload-keystore.jks

@@ -97,7 +97,7 @@ flutter_launcher_icons:
 dependency_overrides:
   intl: ^0.18.0
   js: ^0.6.7
-  win32: ^5.8.0
+  win32: 5.8.0
 
 # For information on the generic Dart part of this file, see: https://dart.dev/tools/pub/pubspec
 
